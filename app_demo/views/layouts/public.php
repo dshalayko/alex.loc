@@ -2,30 +2,19 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use yii\helpers\Url;
-use admin\widgets\Alert;
 use admin\helpers\Schema;
 use admin\models\Setting;
-use admin\modules\shopcart\api\Shopcart;
-use admin\modules\subscribe\api\Subscribe;
-use admin\modules\file\api\File;
+use admin\widgets\Alert;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\helpers\Url;
+use yii\widgets\Breadcrumbs;
 
 $appAsset = Yii::$app->assetManager->getBundle('app_demo\assets\AppAsset');
 
-$goodsCount = count(Shopcart::goods());
 
-$shopCart = '<a href="' . Url::to(['/shopcart']) . '" id="shopcart" title="' . Yii::t('app', 'Корзина') . '">
-                        <i class="fa fa-shopping-cart"></i> ';
 
-if ($goodsCount > 0) {
-    $shopCart .= ' ' . Shopcart::cost() . ' <i class="fas fa-ruble-sign"></i>';
-} else {
-    $shopCart .= ' ' . Yii::t('app', 'Корзина');
-}
-$shopCart .= '</a>';
+
 ?>
 
 
@@ -72,7 +61,7 @@ $shopCart .= '</a>';
         <div class="col-md-6">
             <div class="logo pull-left">
                 <a href="/" title="<?= Setting::get('contact_name') ?>">
-                    <img src="<?= $appAsset->baseUrl ?>/img/logo.png" class="img-responsive" alt="<?= Setting::get('contact_name') ?>">                    
+<!--                    <img src="--><?php //= $appAsset->baseUrl ?><!--/img/logo.png" class="img-responsive" alt="--><?php //= Setting::get('contact_name') ?><!--">-->
                 </a>               
             </div>                                        
         </div>
@@ -87,12 +76,11 @@ $shopCart .= '</a>';
                         <?
                     } else {
                         ?>
-                        <li><a href="<?= Url::to(['/shopcart/orders']) ?>"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'Мои заказы') ?></a></li>
+                        <li><a href="<?= Url::to(['/shopcart/orders']) ?>"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'Мои данные') ?></a></li>
                         <li><a href="<?= Url::to(['/user/logout']) ?>"><i class="fa fa-lock"></i> <?= Yii::$app->user->identity->email ?> (<?= Yii::t('app', 'Выход') ?>)</a></li>
                         <?
                     }
                     ?>
-                    <li><?= $shopCart ?></li>
                 </ul>
             </div>
         </div>
@@ -101,20 +89,13 @@ $shopCart .= '</a>';
 <?
 NavBar::begin();
 $menuItems[] = ['label' => Yii::t('app', 'Главная'), 'url' => ['/']];
-$menuItems[] = ['label' => Yii::t('app', 'Каталог'), 'url' => ['/catalog']];
-$menuItems[] = ['label' => Yii::t('app', 'Статьи'), 'url' => ['/article', 'slug' => 'all']];
-$menuItems[] = ['label' => Yii::t('app', 'Галлереи'), 'url' => ['/gallery', 'slug' => 'smartfony']];
-$menuItems[] = ['label' => Yii::t('app', 'FAQ'), 'url' => ['/faq']];
-$menuItems[] = ['label' => Yii::t('app', 'Страница'), 'url' => ['/page']];
 $menuItems[] = ['label' => Yii::t('app', 'Контакты'), 'url' => ['/contact']];
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => $menuItems,
 ]);
 ?>
-<div class="navbar-form navbar-right" role="search">
-    <?= $this->render('@admin/modules/catalog/views/api/catalog/_search_form', ['sm' => true]) ?>
-</div>
+
 <?
 NavBar::end();
 ?>
@@ -152,24 +133,15 @@ NavBar::end();
                 <?= Schema::localBusiness() ?>
             </div>
         </div>   
-        <div class="col-md-3"> 
-            <small><?= Yii::t('app', 'Прайс-лист в Excel') ?></small><br/>
-            <a class="btn btn-success" href="<?= File::get('price-list')->file ?>"><i class="fa fa-save"></i> <?= Yii::t('app', 'Скачать прайс-лист') ?></a>
-        </div>        
-        <div class="col-md-5 text-right">
-            <small><?= Yii::t('app', 'Подписаться на рассылку') ?>:</small><br/>
-            <?= Subscribe::form() ?>
-        </div>
+
     </div>
     <div class="container mt-30 mb-60">
         <div class="col-md-4">
-            &copy; <?= Setting::get('contact_name') ?>, 2017 - <?= date('Y') ?>
+            &copy; <?= Setting::get('contact_name') ?>, <?= date('Y') ?>
         </div>   
         <div class="col-md-3">             
         </div>        
-        <div class="col-md-5 text-right">
-            <?= \admin\AdminModule::renderPromo() ?>
-        </div>
+
     </div>
 </footer>
 <?= \admin\widgets\ScrollUp::widget(); ?>

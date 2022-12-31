@@ -82,9 +82,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <div class="row">
     <div class="col-md-6">
-        <a href="<?= Url::to(['/admin/users/rbac-init']) ?>" class="btn btn-danger btn-block"><?= Yii::t('admin', 'Инициализация RBAC по-умолчанию. Внимание! Будут удалены все данные о ролях и разрешениях пользователей!') ?></a>
+        <a href="<?= Url::to(['/admin/user/rbac-init']) ?>" class="btn btn-danger btn-block"><?= Yii::t('admin', 'Инициализация RBAC по-умолчанию. Внимание! Будут удалены все данные о ролях и разрешениях пользователей!') ?></a>
     </div>
     <div class="col-md-6">
-        <a href="<?= Url::to(['/admin/users/rbac-init-app']) ?>" class="btn btn-danger btn-block"><?= Yii::t('admin', 'Инициализация RBAC приложения. Внимание! Будут удалены все данные о ролях и разрешениях пользователей!') ?></a>
+        <a href="<?= Url::to(['/admin/user/rbac-init-app']) ?>" class="btn btn-danger btn-block"><?= Yii::t('admin', 'Инициализация RBAC приложения. Внимание! Будут удалены все данные о ролях и разрешениях пользователей!') ?></a>
     </div>
 </div>

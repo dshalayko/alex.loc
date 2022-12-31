@@ -121,8 +121,8 @@ $moduleName = $this->context->module->id;
                                     <span> <?= Yii::t('admin', 'Настройки') ?></span> 
                                 </a>
                             </li>
-                            <li class="<?= ($moduleName == 'admin' && ($this->context->id == 'rbac' || $this->context->id == 'users')) ? 'active' : '' ?>">
-                                <a href="<?= Url::to(['/admin/users']) ?>">
+                            <li class="<?= ($moduleName == 'admin' && ($this->context->id == 'rbac' || $this->context->id == 'user')) ? 'active' : '' ?>">
+                                <a href="<?= Url::to(['/admin/user']) ?>">
                                     <i class="fa fa-users"></i>
                                     <span> <?= Yii::t('admin', 'Пользователи') ?></span> 
                                     <span class="pull-right-container">
@@ -130,7 +130,7 @@ $moduleName = $this->context->module->id;
                                     </span>
                                 </a>
                                 <ul class="treeview-menu">
-                                    <li class="<?= (($moduleName == 'admin' && $this->context->id == 'users') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/users']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Пользователи') ?></a></li> 
+                                    <li class="<?= (($moduleName == 'admin' && $this->context->id == 'user') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/user']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Пользователи') ?></a></li>
                                     <li class="<?= (($moduleName == 'admin' && $this->context->id == 'rbac' && $this->context->action->id == 'role') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/rbac/role']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Роли пользователей') ?></a></li> 
                                     <li class="<?= (($moduleName == 'admin' && $this->context->id == 'rbac' && $this->context->action->id == 'permission') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/rbac/permission']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Разрешения пользователей') ?></a></li> 
                                 </ul>

@@ -14,7 +14,7 @@ $module = $this->context->module->id;
 <?= $this->render('_menu') ?>
 
 <div class="row">
-    <? $form = ActiveForm::begin(['method' => 'get', 'action' => Url::to(['/admin/users'])]); ?>
+    <? $form = ActiveForm::begin(['method' => 'get', 'action' => Url::to(['/admin/user'])]); ?>
     <div class="col-md-3">
         <?= $form->field($filterForm, 'email') ?>
     </div>
@@ -46,39 +46,20 @@ GridView::widget([
             'attribute' => 'email',
             'vAlign' => GridView::ALIGN_MIDDLE,
             'content' => function ($model, $key, $index, $widget) {
-                return '<a href="' . Url::to(['/admin/users/edit', 'id' => $model->id]) . '">' . $model->email . '</a>';
+                return '<a href="' . Url::to(['/admin/user/view', 'id' => $model->id]) . '">' . $model->email . '</a>';
             },
             'width' => '300px',
         ],
-        [
-            'header' => 'Роли',
-            'vAlign' => GridView::ALIGN_MIDDLE,
-            'width' => '100px',
-            'content' => function ($model, $key, $index, $widget) {
-                $str = '';
-                foreach (array_keys(Yii::$app->authManager->getRolesByUser($model->id)) as $role) {
-                    $str .= $role . '&nbsp;&nbsp;&nbsp;';
-                }
-                return $str;
-            },
-        ],
-        [
-            'header' => 'Авторизация',
-            'vAlign' => GridView::ALIGN_MIDDLE,
-            'width' => '100px',
-            'content' => function ($model, $key, $index, $widget) {
-                return '<a href="' . Url::to(['/admin/users/login', 'id' => $model->id]) . '">' . Yii::t('admin', 'Авторизоватся') . '</a>';
-            },
-        ],
         ['class' => 'kartik\grid\ActionColumn',
-            'template' => '{edit}&nbsp;&nbsp;{delete} ',
-            'deleteOptions' => ['label' => '<i class="fa fa-times"></i>'],
+            'content' => function ($model, $key, $index, $widget) {
+                return '<a href="' . Url::to(['/admin/user/view', 'id' => $model->id]) . '">' .'Просмотр' . '</a>';
+            },
         ],
     ],
 ]);
 ?>
 <div class="row mt-20">
     <div class="col-md-2">
-        <?= GridSelectedRowsAction::widget(['grid_id' => 'grid_item', 'buttonOptions' => ['class' => 'btn btn-danger', 'content' => '<i class="fa fa-times"></i> ' . Yii::t('admin', 'Удалить отмеченные'), 'title' => Yii::t('admin', 'Удалить отмеченные')], 'action' => Url::to(['/admin/users/delete-json'])]); ?>
+        <?= GridSelectedRowsAction::widget(['grid_id' => 'grid_item', 'buttonOptions' => ['class' => 'btn btn-danger', 'content' => '<i class="fa fa-times"></i> ' . Yii::t('admin', 'Удалить отмеченные'), 'title' => Yii::t('admin', 'Удалить отмеченные')], 'action' => Url::to(['/admin/user/delete-json'])]); ?>
     </div>
 </div>

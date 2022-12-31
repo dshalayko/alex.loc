@@ -11,14 +11,7 @@ use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 
 $appAsset = Yii::$app->assetManager->getBundle('app_demo\assets\AppAsset');
-
-
-
-
 ?>
-
-
-
 
 <? $this->beginContent('@admin/views/layouts/base.php'); ?>
 <div class="bg-first">
@@ -76,7 +69,7 @@ $appAsset = Yii::$app->assetManager->getBundle('app_demo\assets\AppAsset');
                         <?
                     } else {
                         ?>
-                        <li><a href="<?= Url::to(['/shopcart/orders']) ?>"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'Мои данные') ?></a></li>
+                        <li><a href="<?=Url::to(['/user/view', 'id' => Yii::$app->user->id]) ?>"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'Мои данные') ?></a></li>
                         <li><a href="<?= Url::to(['/user/logout']) ?>"><i class="fa fa-lock"></i> <?= Yii::$app->user->identity->email ?> (<?= Yii::t('app', 'Выход') ?>)</a></li>
                         <?
                     }

@@ -72,7 +72,7 @@ $module = $this->context->module->id;
 <br>
 <br>
 <br>
-<? $form = ActiveForm::begin(['action' => Url::to(['/admin/' . $module . '/excel/load-users-from-excel-file']), 'options' => ['enctype' => 'multipart/form-data']]) ?>
+<? $form = ActiveForm::begin(['action' => Url::to(['/admin/' . $module . '/excel/load-user-from-excel-file']), 'options' => ['enctype' => 'multipart/form-data']]) ?>
 
 <?= $form->field($model, 'importFile')->fileInput()->label(Yii::t('admin/yml', 'Укажите excel файл')) ?>
 

@@ -232,10 +232,10 @@ class User extends \admin\base\ActiveRecordData implements \yii\web\IdentityInte
 
     public function getDataSchema() {
         return [
-            'avatar' => ['title' =>  Yii::t('admin', 'Аватар'), 'value' => ''],
-            'name' => ['title' =>  Yii::t('admin', 'Имя'), 'value' => ''],
-            'phone' => ['title' =>  Yii::t('admin', 'Телефон'), 'value' => ''],
-            'address' => ['title' =>  Yii::t('admin', 'Адрес'), 'value' => ''],
+            'name' => ['title' =>  Yii::t('admin', 'Имя'), 'value' => ' '],
+            'phone' => ['title' =>  Yii::t('admin', 'Телефон'), 'value' => ' '],
+            'address' => ['title' =>  Yii::t('admin', 'Адрес'), 'value' => ' '],
+            'number' => ['title' =>  Yii::t('admin', 'Номер'), 'value' => ' '],
         ];
     }
 

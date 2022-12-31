@@ -4,6 +4,7 @@ namespace admin\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -74,6 +75,12 @@ class UsersController extends \admin\base\admin\Controller {
         ]);
     }
 
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' =>User::findOne($id),
+        ]);
+    }
     public function actionCreate() {
         $model = new User();
         $model->scenario = 'create';
@@ -94,7 +101,7 @@ class UsersController extends \admin\base\admin\Controller {
                     }
 
                     $this->flash('success', Yii::t('admin', 'Пользователь создан'));
-                    return $this->redirect(['/admin/users']);
+                    return $this->redirect(['/admin/user']);
                 } else {
                     $this->flash('error', Yii::t('admin', 'Ошибка. {0}', $model->formatErrors()));
                     return $this->refresh();
@@ -119,7 +126,7 @@ class UsersController extends \admin\base\admin\Controller {
 
         if ($model === null) {
             $this->flash('error', Yii::t('admin', 'Запись не найдена'));
-            return $this->redirect(['/admin/users']);
+            return $this->redirect(['/admin/user']);
         }
 
         if ($model->load(Yii::$app->request->post())) {
@@ -192,7 +199,7 @@ class UsersController extends \admin\base\admin\Controller {
 
         if ($model === null) {
             $this->flash('error', Yii::t('admin', 'Запись не найдена'));
-            return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
+            return $this->redirect(['/admin/user/edit', 'id' => $model->id]);
         }
 
         if (is_array(Yii::$app->request->post('User'))) {
@@ -200,12 +207,12 @@ class UsersController extends \admin\base\admin\Controller {
                 $model->data = Yii::$app->request->post('User')[data];
                 if ($model->save()) {
                     $this->flash('success', Yii::t('admin', 'Дополнительные данные пользователя обновлены'));
-                    return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
+                    return $this->redirect(['/admin/user/edit', 'id' => $model->id]);
                 }
             }
         }
         $this->flash('error', Yii::t('admin', 'Ошибка при обновлении записи. {0}', $model->formatErrors()));
-        return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
+        return $this->redirect(['/admin/user/edit', 'id' => $model->id]);
     }
 
     public function actionOn($id) {

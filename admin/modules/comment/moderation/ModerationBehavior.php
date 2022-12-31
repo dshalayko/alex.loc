@@ -10,7 +10,7 @@ use yii\db\BaseActiveRecord;
 use admin\modules\comment\moderation\enums\Status;
 
 /**
- * Class ModerationBehavior allows you to Approve or Reject resources like posts, comments, users, etc.
+ * Class ModerationBehavior allows you to Approve or Reject resources like posts, comments, user, etc.
  *
  * To use ModerationBehavior, insert the following code to your ActiveRecord class:
  *

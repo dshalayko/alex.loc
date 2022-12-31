@@ -21,7 +21,7 @@ use yii\helpers\Url;
     <div class="col-md-12">        
         <h3><?= Yii::t('admin', 'Дополнительные данные пользователя') ?></h3>
         <hr>            
-        <?= Html::beginForm(Url::to(['/admin/users/data', 'id' => $model->id]), 'post') ?>
+        <?= Html::beginForm(Url::to(['/admin/user/data', 'id' => $model->id]), 'post') ?>
         <? $model->renderDataForm()?>
         
         <?= Html::submitButton(Yii::t('admin', 'Сохранить дополнительные данные'), ['class' => 'btn btn-primary']) ?>

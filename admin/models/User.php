@@ -233,7 +233,13 @@ class User extends \admin\base\ActiveRecordData implements \yii\web\IdentityInte
     public function getDataSchema() {
         return [
             'name' => ['title' =>  Yii::t('admin', 'Имя'), 'value' => ' '],
+            'surname' => ['title' =>  Yii::t('admin', 'Фамилия'), 'value' => ' '],
+            'surname2' => ['title' =>  Yii::t('admin', 'Отчетсво'), 'value' => ' '],
             'phone' => ['title' =>  Yii::t('admin', 'Телефон'), 'value' => ' '],
+            'nameUO' => ['title' =>  Yii::t('admin', 'Наименование учереждения образорвания'), 'value' => ' '],
+            'nameFK' => ['title' =>  Yii::t('admin', 'Наименование Факультета'), 'value' => ' '],
+            'addressORG1' => ['title' =>  Yii::t('admin', 'Название орагнизации, из которой хочешь уволиться'), 'value' => ' '],
+            'nameRUK' => ['title' =>  Yii::t('admin', 'Полностью ФИО и должность руководителя'), 'value' => ' '],
             'address' => ['title' =>  Yii::t('admin', 'Адрес'), 'value' => ' '],
             'number' => ['title' =>  Yii::t('admin', 'Номер'), 'value' => ' '],
         ];

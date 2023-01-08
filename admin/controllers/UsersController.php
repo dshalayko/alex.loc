@@ -2,6 +2,8 @@
 
 namespace admin\controllers;
 
+use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\Writer\PDF;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
@@ -14,9 +16,11 @@ use admin\models\users\FilterForm;
 use admin\behaviors\StatusController;
 use admin\behaviors\SortableController;
 
-class UsersController extends \admin\base\admin\Controller {
+class UsersController extends \admin\base\admin\Controller
+{
 
-    public function beforeAction($action) {
+    public function beforeAction($action)
+    {
         if (!parent::beforeAction($action))
             return false;
 
@@ -24,11 +28,11 @@ class UsersController extends \admin\base\admin\Controller {
         if (DEMO === true) {
 
             if ($action->id == 'delete' ||
-                    $action->id == 'rbac-init' ||
-                    $action->id == 'rbac-init-app' ||
-                    ($action->id == 'edit' && Yii::$app->request->isPost) ||
-                    $action->id == 'delete-json' ||
-                    $action->id == 'off') {
+                $action->id == 'rbac-init' ||
+                $action->id == 'rbac-init-app' ||
+                ($action->id == 'edit' && Yii::$app->request->isPost) ||
+                $action->id == 'delete-json' ||
+                $action->id == 'off') {
                 $this->flash('warning', Yii::t('admin', 'Недоступно в демо-версии!'));
                 $this->goBack();
                 return false;
@@ -37,20 +41,22 @@ class UsersController extends \admin\base\admin\Controller {
         return true;
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
-                [
+            [
                 'class' => SortableController::className(),
                 'model' => User::className(),
             ],
-                [
+            [
                 'class' => StatusController::className(),
                 'model' => User::className()
             ]
         ];
     }
 
-    public function actionIndex() {
+    public function actionIndex()
+    {
 
         $filterForm = new FilterForm();
         $filters = [];
@@ -70,18 +76,20 @@ class UsersController extends \admin\base\admin\Controller {
         ]);
 
         return $this->render('index', [
-                    'dataProvider' => $dataProvider,
-                    'filterForm' => $filterForm,
+            'dataProvider' => $dataProvider,
+            'filterForm' => $filterForm,
         ]);
     }
 
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' =>User::findOne($id),
+            'model' => User::findOne($id),
         ]);
     }
-    public function actionCreate() {
+
+    public function actionCreate()
+    {
         $model = new User();
         $model->scenario = 'create';
 
@@ -111,14 +119,15 @@ class UsersController extends \admin\base\admin\Controller {
             $roles = ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name');
             unset($roles['User']);
             return $this->render('create', [
-                        'model' => $model,
-                        'roles' => $roles,
-                        'user_permit' => [],
+                'model' => $model,
+                'roles' => $roles,
+                'user_permit' => [],
             ]);
         }
     }
 
-    public function actionEdit($id) {
+    public function actionEdit($id)
+    {
         $model = User::findOne($id);
 
         $userFormClass = '\\' . APP_NAME . '\models\UserForm';
@@ -156,15 +165,16 @@ class UsersController extends \admin\base\admin\Controller {
             $user_permit = array_keys(Yii::$app->authManager->getRolesByUser($id));
 
             return $this->render('edit', [
-                        'model' => $model,
-                        'roles' => $roles,
-                        'user_permit' => $user_permit,
-                        'userForm' => $userForm
+                'model' => $model,
+                'roles' => $roles,
+                'user_permit' => $user_permit,
+                'userForm' => $userForm
             ]);
         }
     }
 
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         if (($model = User::findOne($id))) {
             $model->delete();
         } else {
@@ -173,18 +183,21 @@ class UsersController extends \admin\base\admin\Controller {
         return $this->formatResponse(Yii::t('admin', 'Пользователь удален'));
     }
 
-    public function actionRbacInit() {
+    public function actionRbacInit()
+    {
         $result = WebConsole::rbacInit(Yii::$app->user->identity->id);
         return $this->formatResponse($result, true, true);
     }
-    
-    public function actionRbacInitApp() {        
-        
+
+    public function actionRbacInitApp()
+    {
+
         $result = WebConsole::rbacInitApp(Yii::$app->user->identity->id);
         return $this->formatResponse($result, true, true);
     }
 
-    public function actionLogin($id) {
+    public function actionLogin($id)
+    {
         if (($model = User::findOne($id))) {
             Yii::$app->user->login($model, 0);
             return $this->redirect(['/']);
@@ -193,7 +206,8 @@ class UsersController extends \admin\base\admin\Controller {
         }
     }
 
-    public function actionData($id) {
+    public function actionData($id)
+    {
 
         $model = User::findOne($id);
 
@@ -215,21 +229,24 @@ class UsersController extends \admin\base\admin\Controller {
         return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
     }
 
-    public function actionOn($id) {
+    public function actionOn($id)
+    {
         return $this->changeStatus($id, User::STATUS_ON);
     }
 
-    public function actionOff($id) {
+    public function actionOff($id)
+    {
         return $this->changeStatus($id, User::STATUS_OFF);
     }
 
-    public function actionDeleteJson() {
+    public function actionDeleteJson()
+    {
 
         $data = Yii::$app->request->post('data');
         if (isset($data)) {
             if (!is_array($data)) {
                 return Json::encode([
-                            'status' => 'error'
+                    'status' => 'error'
                 ]);
                 return;
             }
@@ -241,13 +258,74 @@ class UsersController extends \admin\base\admin\Controller {
             }
 
             return Json::encode([
-                        'status' => 'success'
+                'status' => 'success'
             ]);
         } else {
             return Json::encode([
-                        'status' => 'error'
+                'status' => 'error'
             ]);
         }
+    }
+
+    public function actionPackage($id)
+    {
+        $model = User::findOne($id);
+        // get your HTML raw content without any layouts or scripts
+        $content = $this->renderPartial('\pdf_template\view1', [
+            'model' => $model,
+        ]);
+
+//        // setup kartik\mpdf\Pdf component
+//        $pdf = new Pdf([
+//            // set to use core fonts only
+//            'mode' => Pdf::MODE_UTF8,
+//            // A4 paper format
+//            'format' => Pdf::FORMAT_A4,
+//            // portrait orientation
+//            'orientation' => Pdf::ORIENT_PORTRAIT,
+//            // stream to browser inline
+//            'destination' => Pdf::DEST_BROWSER,
+//            // your html content input
+//            'content' => $content,
+//            // format content from your own css file if needed or use the
+//            // enhanced bootstrap css built by Krajee for mPDF formatting
+//            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+//            // any css to be embedded if required
+//            'cssInline' => '.kv-heading-1{font-size:18px}',
+//            // set mPDF properties on the fly
+//            'options' => ['title' => 'Пакет документов1'],
+//            // call mPDF methods on the fly
+//
+//        ]);
+
+        // return the pdf output as per the destination setting
+//        return $pdf->render();
+    }
+
+    public function actionDoc($id)
+    {
+        $model = User::findOne($id);
+        $templateProcessor = new TemplateProcessor('uploads\test.docx');
+        $templateProcessor->setValue('firstname', 'dsfsdfsdf');
+        $pathToSave = 'uploads\test1.docx';
+        $templateProcessor->saveAs($pathToSave);
+
+//        $inputfile = $pathToSave;
+//        $path = realpath(realpath(__DIR__) . '/includes/dompdf');
+//
+//
+//        \PhpOffice\PhpWord\Settings::setPdfRendererPath($path);
+//        \PhpOffice\PhpWord\Settings::setPdfRendererName(\PhpOffice\PhpWord\Settings::PDF_RENDERER_DOMPDF);
+////
+//////Load temp file
+//        $phpWord = \PhpOffice\PhpWord\IOFactory::load($inputfile);
+////
+//////Save it
+//        $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'PDF');
+//        $xmlWriter->save('result.pdf');
+
+        return $this->render('\pdf_template\view1');
+
     }
 
 }

@@ -6,11 +6,11 @@ use admin\models\User;
 
 class UserController extends \admin\controllers\api\UserController
 {
-//    public function actionView($id)
-//    {
-//        return $this->render('view', [
-//            'model' => User::findOne($id),
-//        ]);
-//    }
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => User::findOne($id),
+        ]);
+    }
 
 }

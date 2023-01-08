@@ -41,7 +41,10 @@
         "bower-asset/spritely": "^0.6.8",       
         "workerman/workerman": "^3.5",
         "workerman/mqtt": "^1.0",
-        "studio451/yii2-json-rpc-2.0-api": "^1.0"
+        "studio451/yii2-json-rpc-2.0-api": "^1.0",
+        "mpdf/mpdf": "^8.1",
+        "phpoffice/phpword": "^1.0",
+        "dompdf/dompdf": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

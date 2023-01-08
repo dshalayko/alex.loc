@@ -30,7 +30,7 @@ class InstallController extends \yii\web\Controller {
             return $this->showError(Yii::t('admin', 'Нет соединения с базой данных <b>' . $dbName . '</b>!<br> Если база данных <b>' . $dbName . '</b> не создана, создайте ее.<br> Также проверьте правильность настроек подключения к базе данных: <b>' . $configFile . '</b>'));
         }
         if (INSTALLED) {
-            return $this->showError(Yii::t('admin', \admin\AdminModule::NAME . ' уже установлена.<br> Если вы хотите переустановить ' . \admin\AdminModule::NAME . ' установите значение константы INSTALLED в ' . Yii::getAlias('@webroot/view.php') . ' равным false!'));
+            return $this->showError(Yii::t('admin', \admin\AdminModule::NAME . ' уже установлена.<br> Если вы хотите переустановить ' . \admin\AdminModule::NAME . ' установите значение константы INSTALLED в ' . Yii::getAlias('@webroot/index.php') . ' равным false!'));
         }
         $installForm = new InstallForm();
 

@@ -11,7 +11,7 @@ $this->title = Yii::t('admin', 'Установка завершена');
 <br>
 <? if (!INSTALLED) { ?>
 <p class="bg-warning p-10">
-   <b><?= Yii::t('admin', 'ВНИМАНИЕ!<br>Установите значение константы INSTALLED в {path} равным true и обновите эту страницу.', ['path' => Yii::getAlias('@webroot/view.php')]) ?></b>
+   <b><?= Yii::t('admin', 'ВНИМАНИЕ!<br>Установите значение константы INSTALLED в {path} равным true и обновите эту страницу.', ['path' => Yii::getAlias('@webroot/index.php')]) ?></b>
 </p>
 <p class="bg-success p-10">
    <b><?= Yii::t('admin', 'Вы также можете установить демо-данные из папки {path}.', ['path' => Yii::getAlias('@app/demo_data')]) ?></b>

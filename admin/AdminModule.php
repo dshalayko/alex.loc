@@ -15,7 +15,7 @@ use admin\behaviors\AccessBehavior;
 class AdminModule extends \yii\base\Module implements BootstrapInterface {
 
     const VERSION = '1.0.1';
-    const NAME = 'Yii Studio';
+    const NAME = ' ';
 
     public $settings;
     public $activeModules;

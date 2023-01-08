@@ -14,7 +14,7 @@ $module = $this->context->module->id;
 <?= $this->render('_menu') ?>
 
 <div class="row">
-    <? $form = ActiveForm::begin(['method' => 'get', 'action' => Url::to(['/admin/user'])]); ?>
+    <? $form = ActiveForm::begin(['method' => 'get', 'action' => Url::to(['/admin/users'])]); ?>
     <div class="col-md-3">
         <?= $form->field($filterForm, 'email') ?>
     </div>
@@ -46,13 +46,13 @@ GridView::widget([
             'attribute' => 'email',
             'vAlign' => GridView::ALIGN_MIDDLE,
             'content' => function ($model, $key, $index, $widget) {
-                return '<a href="' . Url::to(['/admin/user/view', 'id' => $model->id]) . '">' . $model->email . '</a>';
+                return '<a href="' . Url::to(['/admin/users/view', 'id' => $model->id]) . '">' . $model->email . '</a>';
             },
             'width' => '300px',
         ],
-        ['class' => 'kartik\grid\ActionColumn',
+        ['attribute' => 'Действия',
             'content' => function ($model, $key, $index, $widget) {
-                return '<a href="' . Url::to(['/admin/user/view', 'id' => $model->id]) . '">' .'Просмотр' . '</a>';
+                return '<a href="' . Url::to(['/admin/users/edit', 'id' => $model->id]) . '">' .'<i class="fa fa-edit"></i>' . '</a>';
             },
         ],
     ],

@@ -101,7 +101,7 @@ class UsersController extends \admin\base\admin\Controller {
                     }
 
                     $this->flash('success', Yii::t('admin', 'Пользователь создан'));
-                    return $this->redirect(['/admin/user']);
+                    return $this->redirect(['/admin/users']);
                 } else {
                     $this->flash('error', Yii::t('admin', 'Ошибка. {0}', $model->formatErrors()));
                     return $this->refresh();
@@ -126,7 +126,7 @@ class UsersController extends \admin\base\admin\Controller {
 
         if ($model === null) {
             $this->flash('error', Yii::t('admin', 'Запись не найдена'));
-            return $this->redirect(['/admin/user']);
+            return $this->redirect(['/admin/users']);
         }
 
         if ($model->load(Yii::$app->request->post())) {
@@ -199,20 +199,20 @@ class UsersController extends \admin\base\admin\Controller {
 
         if ($model === null) {
             $this->flash('error', Yii::t('admin', 'Запись не найдена'));
-            return $this->redirect(['/admin/user/edit', 'id' => $model->id]);
+            return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
         }
 
         if (is_array(Yii::$app->request->post('User'))) {
-            if (is_array(Yii::$app->request->post('User')[data])) {
-                $model->data = Yii::$app->request->post('User')[data];
+            if (is_array(Yii::$app->request->post('User')['data'])) {
+                $model->data = Yii::$app->request->post('User')['data'];
                 if ($model->save()) {
                     $this->flash('success', Yii::t('admin', 'Дополнительные данные пользователя обновлены'));
-                    return $this->redirect(['/admin/user/edit', 'id' => $model->id]);
+                    return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
                 }
             }
         }
         $this->flash('error', Yii::t('admin', 'Ошибка при обновлении записи. {0}', $model->formatErrors()));
-        return $this->redirect(['/admin/user/edit', 'id' => $model->id]);
+        return $this->redirect(['/admin/users/edit', 'id' => $model->id]);
     }
 
     public function actionOn($id) {

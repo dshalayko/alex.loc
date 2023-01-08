@@ -105,7 +105,7 @@ class WebConsole extends \admin\helpers\WebConsole {
     public static function ymlLoadUsersFromExcelFile($fileName) {
         ob_start();
 
-        self::console('admin\modules\yml\commands')->runAction('yml/load-user-from-excel-file', ['file_name' => $fileName, 'interactive' => false]);
+        self::console('admin\modules\yml\commands')->runAction('yml/load-users-from-excel-file', ['file_name' => $fileName, 'interactive' => false]);
 
         $result = file_get_contents(self::$logFile) . "\n" . ob_get_clean();
 

@@ -76,7 +76,7 @@ $this->title = Yii::t('admin', 'Система');
         <?
         if (YII_DEBUG) {
             ?>
-            <a href="<?= Url::to(['/admin/system/clear-user-no-order']) ?>" class="btn btn-danger btn-block"><i class="fa fa-times"></i> <?= Yii::t('admin', 'Удалить пользователей, у которых нет заказов') ?></a>
+            <a href="<?= Url::to(['/admin/system/clear-users-no-order']) ?>" class="btn btn-danger btn-block"><i class="fa fa-times"></i> <?= Yii::t('admin', 'Удалить пользователей, у которых нет заказов') ?></a>
             <?
         }
         ?>

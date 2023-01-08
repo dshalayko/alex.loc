@@ -56,7 +56,7 @@ class YmlController extends Controller {
                 'file_name', 'interactive'
             ];
         }
-        if ($actionID == 'load-user-from-excel-file') {
+        if ($actionID == 'load-users-from-excel-file') {
             return [
                 'file_name', 'interactive'
             ];

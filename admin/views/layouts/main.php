@@ -56,95 +56,72 @@ $moduleName = $this->context->module->id;
             </header>
             <aside class="main-sidebar">
                 <section class="sidebar">
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="<?= Yii::t('admin', 'Поиск') ?>...">
-                            <span class="input-group-btn">
-                                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </form>
-                    <ul class="sidebar-menu">
-                        <li class="header text-uppercase"><?= Yii::t('admin', 'Модули') ?></li>
-                        <? foreach (Yii::$app->getModule('admin')->activeModules as $module) { ?>
 
-                            <?
-                                //Проверяем права по AuthManager
-                                if (!Yii::$app->user->can('admin/' . $module->name)) {
-                                    continue;
-                                }
-                            ?>
-                            <li class="treeview <?= ($moduleName == $module->name ? 'active' : '') ?>">
-                                <a href="<?= Url::to(["/admin/$module->name"]) ?>">
-                                    <? if ($module->icon != '') : ?>
-                                        <i class="fa fa-<?= $module->icon ?>"></i>
-                                    <? endif; ?>
-                                    <span> <?= $module->title ?></span> 
-                                    <? if ($module->notice > 0 || is_array($module->settings['__submenu_module'])) : ?>
-                                        <span class="pull-right-container">
-                                            <? if ($module->notice > 0) : ?>
-                                                <small class="label pull-right bg-green"><?= $module->notice ?></small>
-                                            <? endif; ?>
-                                            <? if (is_array($module->settings['__submenu_module'])) : ?>
-                                                <i class="fa fa-angle-left pull-right"></i>
-                                            <? endif; ?>
-                                        </span>
-                                    <? endif; ?>
-                                </a>
-                                <?
-                                if (is_array($module->settings['__submenu_module'])) {
-                                    ?>
-                                    <ul class="treeview-menu">
-                                        <?
-                                        foreach ($module->settings['__submenu_module'] as $submenu) {
-                                            ?>
-                                            <li class="<?= (($moduleName == $module->name && $this->context->id == $submenu['id']) ? 'active' : '') ?>"><a href="<?= $submenu['url'] ?>"><i class="fa fa-circle"></i><?= $submenu['label'] ?></a></li> 
-                                            <?
-                                        }
-                                        ?>
-                                    </ul>
-                                <? } ?>
-                            </li>
-                        <? } ?>   
+                    <ul class="sidebar-menu">
+<!--                        <li class="header text-uppercase">--><?php //= Yii::t('admin', 'Модули') ?><!--</li>-->
+<!--                        --><?// foreach (Yii::$app->getModule('admin')->activeModules as $module) { ?>
+<!---->
+<!--                            --><?//
+//                                //Проверяем права по AuthManager
+//                                if (!Yii::$app->user->can('admin/' . $module->name)) {
+//                                    continue;
+//                                }
+//                            ?>
+<!--                            <li class="treeview --><?php //= ($moduleName == $module->name ? 'active' : '') ?><!--">-->
+<!--                                <a href="--><?php //= Url::to(["/admin/$module->name"]) ?><!--">-->
+<!--                                    --><?// if ($module->icon != '') : ?>
+<!--                                        <i class="fa fa---><?php //= $module->icon ?><!--"></i>-->
+<!--                                    --><?// endif; ?>
+<!--                                    <span> --><?php //= $module->title ?><!--</span> -->
+<!--                                    --><?// if ($module->notice > 0 || is_array($module->settings['__submenu_module'])) : ?>
+<!--                                        <span class="pull-right-container">-->
+<!--                                            --><?// if ($module->notice > 0) : ?>
+<!--                                                <small class="label pull-right bg-green">--><?php //= $module->notice ?><!--</small>-->
+<!--                                            --><?// endif; ?>
+<!--                                            --><?// if (is_array($module->settings['__submenu_module'])) : ?>
+<!--                                                <i class="fa fa-angle-left pull-right"></i>-->
+<!--                                            --><?// endif; ?>
+<!--                                        </span>-->
+<!--                                    --><?// endif; ?>
+<!--                                </a>-->
+<!--                                --><?//
+//                                if (is_array($module->settings['__submenu_module'])) {
+//                                    ?>
+<!--                                    <ul class="treeview-menu">-->
+<!--                                        --><?//
+//                                        foreach ($module->settings['__submenu_module'] as $submenu) {
+//                                            ?>
+<!--                                            <li class="--><?php //= (($moduleName == $module->name && $this->context->id == $submenu['id']) ? 'active' : '') ?><!--"><a href="--><?php //= $submenu['url'] ?><!--"><i class="fa fa-circle"></i>--><?php //= $submenu['label'] ?><!--</a></li> -->
+<!--                                            --><?//
+//                                        }
+//                                        ?>
+<!--                                    </ul>-->
+<!--                                --><?// } ?>
+<!--                            </li>-->
+<!--                        --><?// } ?><!--   -->
                         <? if (Yii::$app->user->can('SuperAdmin')) { ?>
                             <li class="header"><?= Yii::t('admin', 'СИСТЕМА') ?></li>                          
-                            <li class="<?= ($moduleName == 'admin' && $this->context->id == 'modules') ? 'active' : '' ?>">
-                                <a href="<?= Url::to(['/admin/modules']) ?>">
-                                    <i class="fa fa-th-large"></i>
-                                    <span> <?= Yii::t('admin', 'Модули') ?></span> 
-                                </a>
-                            </li>                         
+<!--                            <li class="--><?php //= ($moduleName == 'admin' && $this->context->id == 'modules') ? 'active' : '' ?><!--">-->
+<!--                                <a href="--><?php //= Url::to(['/admin/modules']) ?><!--">-->
+<!--                                    <i class="fa fa-th-large"></i>-->
+<!--                                    <span> --><?php //= Yii::t('admin', 'Модули') ?><!--</span> -->
+<!--                                </a>-->
+<!--                            </li>                         -->
+
+                            <li class="<?= ($moduleName == 'admin' && ($this->context->id == 'rbac' || $this->context->id == 'user')) ? 'active' : '' ?>">
+                            <li class="<?= (($moduleName == 'admin' && $this->context->id == 'user') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/users']) ?>"><i class="fa fa-users"></i><?= Yii::t('admin', 'Пользователи') ?></a></li>
+                            <li class="<?= (($moduleName == 'admin' && $this->context->id == 'rbac' && $this->context->action->id == 'role') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/rbac/role']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Роли пользователей') ?></a></li>
+                            <li class="<?= (($moduleName == 'admin' && $this->context->id == 'rbac' && $this->context->action->id == 'permission') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/rbac/permission']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Разрешения пользователей') ?></a></li>
                             <li class="<?= ($moduleName == 'admin' && $this->context->id == 'settings') ? 'active' : '' ?>">
                                 <a href="<?= Url::to(['/admin/settings']) ?>">
                                     <i class="fa fa-cog"></i>
-                                    <span> <?= Yii::t('admin', 'Настройки') ?></span> 
+                                    <span> <?= Yii::t('admin', 'Настройки') ?></span>
                                 </a>
-                            </li>
-                            <li class="<?= ($moduleName == 'admin' && ($this->context->id == 'rbac' || $this->context->id == 'user')) ? 'active' : '' ?>">
-                                <a href="<?= Url::to(['/admin/users']) ?>">
-                                    <i class="fa fa-users"></i>
-                                    <span> <?= Yii::t('admin', 'Пользователи') ?></span> 
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li class="<?= (($moduleName == 'admin' && $this->context->id == 'user') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/users']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Пользователи') ?></a></li>
-                                    <li class="<?= (($moduleName == 'admin' && $this->context->id == 'rbac' && $this->context->action->id == 'role') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/rbac/role']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Роли пользователей') ?></a></li> 
-                                    <li class="<?= (($moduleName == 'admin' && $this->context->id == 'rbac' && $this->context->action->id == 'permission') ? 'active' : '') ?>"><a href="<?= Url::to(['/admin/rbac/permission']) ?>"><i class="fa fa-circle"></i><?= Yii::t('admin', 'Разрешения пользователей') ?></a></li> 
-                                </ul>
                             </li>
                             <li class="<?= ($moduleName == 'admin' && $this->context->id == 'system') ? 'active' : '' ?>">
                                 <a href="<?= Url::to(['/admin/system']) ?>">
                                     <i class="fa fa-hdd"></i>
                                     <span> <?= Yii::t('admin', 'Система') ?></span> 
-                                </a>
-                            </li>
-                            <li class="<?= ($moduleName == 'admin' && $this->context->id == 'translate') ? 'active' : '' ?>">
-                                <a href="<?= Url::to(['/admin/translate']) ?>">
-                                    <i class="fa fa-globe"></i>
-                                    <span> <?= Yii::t('admin', 'Локализация') ?></span> 
                                 </a>
                             </li>
                             <li class="<?= ($moduleName == 'admin' && $this->context->id == 'logs') ? 'active' : '' ?>">
@@ -153,12 +130,7 @@ $moduleName = $this->context->module->id;
                                     <span> <?= Yii::t('admin', 'Логи') ?></span> 
                                 </a>
                             </li>
-                            <li class="<?= ($moduleName == 'admin' && $this->context->id == 'dump') ? 'active' : '' ?>">
-                                <a href="<?= Url::to(['/admin/dump']) ?>">
-                                    <i class="fa fa-database"></i>
-                                    <span> <?= Yii::t('admin', 'Бэкапы') ?></span> 
-                                </a>
-                            </li>
+
                         <? } ?>
                     </ul>
                 </section>
@@ -197,7 +169,7 @@ $moduleName = $this->context->module->id;
                 </section>               
             </div>
             <footer class="main-footer">                
-                2017 - <?= date('Y') ?> <a href="https://yiistudio.ru" target="_blank" title="https://yiistudio.ru"><?= \admin\AdminModule::NAME ?></a> v<?= \admin\AdminModule::VERSION ?> 
+                 <?= date('Y') ?>  v<?= \admin\AdminModule::VERSION ?>
             </footer>
         </div>
         <? $this->endBody() ?>

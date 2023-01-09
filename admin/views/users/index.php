@@ -50,14 +50,14 @@ GridView::widget([
             },
             'width' => '300px',
         ],
-        ['attribute' => 'Действия',
+        ['attribute' => 'Редактировать',
             'content' => function ($model, $key, $index, $widget) {
                 return '<a href="' . Url::to(['/admin/users/edit', 'id' => $model->id]) . '">' .'<i class="fa fa-edit"></i>' . '</a>';
             },
         ],
-        ['attribute' => 'pdf',
+        ['attribute' => 'Документы',
             'content' => function ($model, $key, $index, $widget) {
-                return '<a target="_blank" href="' . Url::to(['/admin/users/package', 'id' => $model->id]) . '">' .'<i class="fa fa-file-pdf"></i>' . '</a>';
+                return '<a href="' . Url::to(['/admin/users/doc', 'id' => $model->id]) . '">' .'<i class="fa fa-file-word"></i>' . '</a>';
             },
         ],
     ],

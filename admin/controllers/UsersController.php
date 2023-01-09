@@ -267,64 +267,18 @@ class UsersController extends \admin\base\admin\Controller
         }
     }
 
-    public function actionPackage($id)
-    {
-        $model = User::findOne($id);
-        // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('\pdf_template\view1', [
-            'model' => $model,
-        ]);
-
-//        // setup kartik\mpdf\Pdf component
-//        $pdf = new Pdf([
-//            // set to use core fonts only
-//            'mode' => Pdf::MODE_UTF8,
-//            // A4 paper format
-//            'format' => Pdf::FORMAT_A4,
-//            // portrait orientation
-//            'orientation' => Pdf::ORIENT_PORTRAIT,
-//            // stream to browser inline
-//            'destination' => Pdf::DEST_BROWSER,
-//            // your html content input
-//            'content' => $content,
-//            // format content from your own css file if needed or use the
-//            // enhanced bootstrap css built by Krajee for mPDF formatting
-//            'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
-//            // any css to be embedded if required
-//            'cssInline' => '.kv-heading-1{font-size:18px}',
-//            // set mPDF properties on the fly
-//            'options' => ['title' => 'Пакет документов1'],
-//            // call mPDF methods on the fly
-//
-//        ]);
-
-        // return the pdf output as per the destination setting
-//        return $pdf->render();
-    }
-
     public function actionDoc($id)
     {
         $model = User::findOne($id);
-        $templateProcessor = new TemplateProcessor('uploads\test.docx');
-        $templateProcessor->setValue('firstname', 'dsfsdfsdf');
-        $pathToSave = 'uploads\test1.docx';
+        $fio = $model->data['surname'] . ' ' . $model->data['name'] . ' ' . $model->data['surname2'];
+        $templateProcessor = new TemplateProcessor('uploads\template_paket_doc_1.docx');
+        $templateProcessor->setValue('fio', $fio);
+        $templateProcessor->setValue('nameruk', $model->data['nameRUK']);
+        $templateProcessor->setValue('address', $model->data['address']);
+        $pathToSave = 'uploads/' . $fio . '_' . $id . '.docx';
         $templateProcessor->saveAs($pathToSave);
 
-//        $inputfile = $pathToSave;
-//        $path = realpath(realpath(__DIR__) . '/includes/dompdf');
-//
-//
-//        \PhpOffice\PhpWord\Settings::setPdfRendererPath($path);
-//        \PhpOffice\PhpWord\Settings::setPdfRendererName(\PhpOffice\PhpWord\Settings::PDF_RENDERER_DOMPDF);
-////
-//////Load temp file
-//        $phpWord = \PhpOffice\PhpWord\IOFactory::load($inputfile);
-////
-//////Save it
-//        $xmlWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'PDF');
-//        $xmlWriter->save('result.pdf');
-
-        return $this->render('\pdf_template\view1');
+        return $this->render('\pdf_template\view1', ['path' => $pathToSave]);
 
     }
 

@@ -2,13 +2,16 @@
 
 namespace admin\controllers\api;
 
+use admin\base\Controller;
 use Yii;
 use admin\models\api\LoginForm;
 use admin\models\api\PasswordResetRequestForm;
 use admin\models\api\ResetPasswordForm;
 use admin\models\Setting;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
 
-class UserController extends \yii\web\Controller {
+class UserController extends Controller {
     
     public $setReturnUrl = false;
     public $layout = 'public';

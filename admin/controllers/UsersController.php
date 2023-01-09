@@ -275,7 +275,9 @@ class UsersController extends \admin\base\admin\Controller
         $templateProcessor->setValue('fio', $fio);
         $templateProcessor->setValue('nameruk', $model->data['nameRUK']);
         $templateProcessor->setValue('address', $model->data['address']);
-        $pathToSave = 'uploads/' . $fio . '_' . $id . '.docx';
+        $fioToPath = $model->data['surname'].$model->data['name']. $model->data['surname2'];
+
+        $pathToSave = 'uploads/' . $id . '.docx';
         $templateProcessor->saveAs($pathToSave);
 
         return $this->render('\pdf_template\view1', ['path' => $pathToSave]);

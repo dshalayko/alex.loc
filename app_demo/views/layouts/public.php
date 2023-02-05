@@ -69,7 +69,7 @@ $appAsset = Yii::$app->assetManager->getBundle('app_demo\assets\AppAsset');
                         <?
                     } else {
                         ?>
-                        <li><a href="<?=Url::to(['/user/view', 'id' => Yii::$app->user->id]) ?>"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'Мои данные') ?></a></li>
+                        <li><a href="<?=Url::to(['/user/view', 'id' => Yii::$app->user->id]) ?>"><i class="fa fa-list-ul"></i> <?= Yii::t('app', 'Личный кабинет') ?></a></li>
                         <li><a href="<?= Url::to(['/user/logout']) ?>"><i class="fa fa-lock"></i> <?= Yii::$app->user->identity->email ?> (<?= Yii::t('app', 'Выход') ?>)</a></li>
                         <?
                     }
@@ -83,6 +83,9 @@ $appAsset = Yii::$app->assetManager->getBundle('app_demo\assets\AppAsset');
 NavBar::begin();
 $menuItems[] = ['label' => Yii::t('app', 'Главная'), 'url' => ['/']];
 $menuItems[] = ['label' => Yii::t('app', 'Контакты'), 'url' => ['/contact']];
+$menuItems[] = ['label' => Yii::t('app', 'Новости'), 'url' => ['/news']];
+$menuItems[] = ['label' => Yii::t('app', 'Услуги'), 'url' => ['/price']];
+$menuItems[] = ['label' => Yii::t('app', 'Реферальная программа'), 'url' => ['/referal']];
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => $menuItems,

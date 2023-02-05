@@ -280,7 +280,7 @@ class UsersController extends \admin\base\admin\Controller
         $pathToSave = 'uploads/' . $id . '.docx';
         $templateProcessor->saveAs($pathToSave);
 
-        return $this->render('\pdf_template\view1', ['path' => $pathToSave]);
+        return $this->render('\pdf_template\view1', ['path' => $pathToSave,'model'=>$model]);
 
     }
 

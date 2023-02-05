@@ -1,7 +1,8 @@
 <?
 use admin\modules\page\api\Page;
 
-$page = Page::get('page-opt');
+
+$page = Page::get('page-'.$slug);
 
 $this->title = $page->seo('title');
 $this->params['description'] = $page->seo('description');

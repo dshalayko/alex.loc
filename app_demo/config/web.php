@@ -10,6 +10,7 @@ $config = [
             'rules' => [
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 'catalog/search' => 'catalog/search',
+                'page/<slug:[\w-]+>' => 'page/index',
                 'catalog/<slug:[\w-]+>' => 'catalog',
                 'catalog/<category:[\w-]+>/<slug:[\w-]+>' => 'catalog/item',
                 'brand/<slug:[\w-]+>' => 'brand',

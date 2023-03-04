@@ -45,7 +45,7 @@ $appAsset = Yii::$app->assetManager->getBundle('app_demo\assets\AppAsset');
 <?//
 //NavBar::end();
 ?>
-<div class="container" style="display: flex;
+<div class="container main-container-1" style="display: flex;
     align-content: space-around;
     justify-content: space-around;
     flex-wrap: nowrap;

@@ -88,7 +88,7 @@ class ActiveRecordData extends \admin\base\ActiveRecord
                 if (!is_bool($value)) {
                     echo '<div class="form-group">';
                     echo '<label class="control-label">' . $title . '</label>';
-                    echo Html::input('text', $className . '[data][' . $key . ']', $value, ['class' => 'form-control']);
+                    echo Html::input('text', $className . '[data][' . $key . ']', $value, ['class' => 'form-control','placeholder'=>$value]);
                     echo '</div>';
                 } else {
                     echo '<div class="checkbox">';
@@ -101,56 +101,6 @@ class ActiveRecordData extends \admin\base\ActiveRecord
         }
     }
 
-    public function renderDataFormStepOne()
-    {
-        $className = \yii\helpers\StringHelper::basename(get_class($this));
-        foreach ($this->getDataSchema() as $key => $param) {
-            if (isset($this->data[$key])) {
-                $value = $this->data[$key];
-            }
 
-            if (isset($param['title'])) {
-                $title = $param['title'];
-            } else {
-                $title = $key;
-            }
-
-
-            switch ($key) {
-                case "fio":
-                case "nameUO":
-                case "spetialnost":
-                case "dolshnost":
-                case "adresonano":
-                case "dolshnost_adresata":
-                    echo '<div class="form-group">';
-                    echo '<label class="control-label">' . $title . '</label>';
-                    echo Html::input('text', $className . '[data][' . $key . ']', $value, ['class' => 'form-control']);
-                    echo '</div>';
-                    break;
-                case "universe":
-                    // Список значений и подписей для радиокнопок
-                    $items = [
-                        $key => 'Option 1',
-                        'value1' => 'Option 2',
-                        'value2' => 'Option 3',
-                    ];
-
-                    echo '<div class="form-group">';
-                    echo '<label class="control-label">' . $title . '</label>';
-                    echo Html::radioList('attribute', null, $items, [
-                        'item' => function ($index, $label, $name, $checked, $value) {
-                            return Html::tag('label',
-                                Html::radio($name, $checked, ['value' => $value]) .
-                                Html::tag('span', $label)
-                            );
-                        }
-                    ]);
-                    break;
-            }
-
-
-        }
-    }
 
 }

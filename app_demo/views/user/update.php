@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url; ?>
+<style>
+    .main-container-1{
+        display: block!important;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-sm-6">

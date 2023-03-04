@@ -50,6 +50,12 @@ GridView::widget([
             },
             'width' => '300px',
         ],
+        ['attribute' => 'Просмотр',
+            'content' => function ($model, $key, $index, $widget) {
+                return '<a href="' . Url::to(['/admin/users/view', 'id' => $model->id]) . '">' . 'Посмотреть данныe'. '</a>';
+
+            },
+        ],
         ['attribute' => 'Редактировать',
             'content' => function ($model, $key, $index, $widget) {
                 return '<a href="' . Url::to(['/admin/users/edit', 'id' => $model->id]) . '">' .'<i class="fa fa-edit"></i>' . '</a>';

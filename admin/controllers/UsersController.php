@@ -271,7 +271,7 @@ class UsersController extends \admin\base\admin\Controller
     {
         $model = User::findOne($id);
         $fio = $model->data['surname'] . ' ' . $model->data['name'] . ' ' . $model->data['surname2'];
-        $templateProcessor = new TemplateProcessor('uploads\template_paket_doc_1.docx');
+        $templateProcessor = new TemplateProcessor('uploads/template_paket_doc_1.docx');
         $templateProcessor->setValue('fio', $fio);
         $templateProcessor->setValue('nameruk', $model->data['nameRUK']);
         $templateProcessor->setValue('address', $model->data['address']);
@@ -280,7 +280,7 @@ class UsersController extends \admin\base\admin\Controller
         $pathToSave = 'uploads/' . $id . '.docx';
         $templateProcessor->saveAs($pathToSave);
 
-        return $this->render('\pdf_template\view1', ['path' => $pathToSave,'model'=>$model]);
+        return $this->render('/pdf_template/view1', ['path' => $pathToSave,'model'=>$model]);
 
     }
 

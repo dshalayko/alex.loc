@@ -15,7 +15,6 @@ use admin\validators\ReCaptchaValidator;
 class RegistrationForm extends Model {
 
     public $email;
-    public $name;
     public $password;
     public $reCaptcha;
     /**
@@ -28,9 +27,6 @@ class RegistrationForm extends Model {
                 ['email', 'email'],
                 ['email', 'string', 'max' => 255],
                 ['email', 'unique', 'targetClass' => '\admin\models\User', 'message' => Yii::t('admin', 'Пользователь с таким email уже существует')],
-                ['name', 'string', 'max' => 255],
-                ['name', 'trim'],
-                ['name', 'required'],
                 ['password', 'required', 'when' => function() {
                     return !Setting::get('generatePasswordRegistration');
                 }],
@@ -44,7 +40,6 @@ class RegistrationForm extends Model {
     public function attributeLabels() {
         return [
             'email' => Yii::t('admin', 'E-mail'),
-            'name' => Yii::t('admin', 'Имя'),
             'password' => Yii::t('admin', 'Пароль'),
             'reCaptcha' => Yii::t('admin', 'Проверка')
         ];
@@ -67,9 +62,6 @@ class RegistrationForm extends Model {
         $user->email = $this->email;
         $user->password = $this->password;
 
-        $user->data = [
-            'name' => $this->name,
-        ];
 
         if ($user->save()) {
             $this->notifyUser();

@@ -39,7 +39,7 @@ use yii\helpers\Url; ?>
             Имя: <?= $model->data['name'] ?> <br>
             Фамилия: <?= $model->data['surname'] ?><br>
             Отчетсво: <?= $model->data['surname2'] ?><br>
-            Телефон: <?= $model->data['phone'] ?><br>
+            Телефон: <?= $model->data['number'] ?><br>
             Наименование учереждения образорвания: <?= $model->data['nameUO'] ?><br>
             Наименование Факультета: <?= $model->data['nameFK'] ?><br>
             Название орагнизации, из которой хочешь уволиться: <?= $model->data['addressORG1'] ?><br>

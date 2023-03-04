@@ -27,10 +27,10 @@ class PageController extends \admin\base\api\Controller
                             }
                         }
                     }
-                return $this->render('uslugi\step-two-US1', ['model' => $model]);
+                return $this->render('uslugi/step-two-US1', ['model' => $model]);
 
             } else
-                return $this->render('uslugi\US' . $slug);
+                return $this->render('uslugi/US' . $slug);
 
         } else {
             return $this->render('uslugi');

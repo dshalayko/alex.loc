@@ -9,20 +9,23 @@ use yii\helpers\Html;
  * Base active record class for admin models with data
  * @package admin\base
  */
-class ActiveRecordData extends \admin\base\ActiveRecord {
+class ActiveRecordData extends \admin\base\ActiveRecord
+{
 
-    public function afterFind() {
+    public function afterFind()
+    {
 
         parent::afterFind();
 
-        if ($this->data == 'null') {            
+        if ($this->data == 'null') {
             $this->setDefaultData();
         } else {
             $this->data = json_decode($this->data, true);
         }
     }
-    
-    public function beforeValidate() {
+
+    public function beforeValidate()
+    {
 
         $this->data = json_encode($this->data);
 
@@ -46,11 +49,13 @@ class ActiveRecordData extends \admin\base\ActiveRecord {
 //  }
 //  End example   
 
-    public function getDataSchema() {
+    public function getDataSchema()
+    {
         return [];
     }
-    
-    public function setDefaultData() {
+
+    public function setDefaultData()
+    {
         $data = [];
         foreach ($this->getDataSchema() as $key => $param) {
             $data[$key] = $param['value'];
@@ -58,7 +63,8 @@ class ActiveRecordData extends \admin\base\ActiveRecord {
         $this->data = $data;
     }
 
-    public function renderDataForm() {
+    public function renderDataForm()
+    {
         $className = \yii\helpers\StringHelper::basename(get_class($this));
         foreach ($this->getDataSchema() as $key => $param) {
             if (isset($this->data[$key])) {
@@ -75,7 +81,7 @@ class ActiveRecordData extends \admin\base\ActiveRecord {
                 echo '<div class="form-group">';
                 echo '<label class="control-label">' . $title . '</label>';
                 echo Html::dropDownList(
-                        $className . '[data][' . $key . ']', $value, yii\helpers\ArrayHelper::map($param['options'], 'value', 'title'), ['class' => 'form-control']
+                    $className . '[data][' . $key . ']', $value, yii\helpers\ArrayHelper::map($param['options'], 'value', 'title'), ['class' => 'form-control']
                 );
                 echo '</div>';
             } else {
@@ -92,6 +98,58 @@ class ActiveRecordData extends \admin\base\ActiveRecord {
                     echo '</div>';
                 }
             }
+        }
+    }
+
+    public function renderDataFormStepOne()
+    {
+        $className = \yii\helpers\StringHelper::basename(get_class($this));
+        foreach ($this->getDataSchema() as $key => $param) {
+            if (isset($this->data[$key])) {
+                $value = $this->data[$key];
+            }
+
+            if (isset($param['title'])) {
+                $title = $param['title'];
+            } else {
+                $title = $key;
+            }
+
+
+            switch ($key) {
+                case "fio":
+                case "nameUO":
+                case "spetialnost":
+                case "dolshnost":
+                case "adresonano":
+                case "dolshnost_adresata":
+                    echo '<div class="form-group">';
+                    echo '<label class="control-label">' . $title . '</label>';
+                    echo Html::input('text', $className . '[data][' . $key . ']', $value, ['class' => 'form-control']);
+                    echo '</div>';
+                    break;
+                case "universe":
+                    // Список значений и подписей для радиокнопок
+                    $items = [
+                        $key => 'Option 1',
+                        'value1' => 'Option 2',
+                        'value2' => 'Option 3',
+                    ];
+
+                    echo '<div class="form-group">';
+                    echo '<label class="control-label">' . $title . '</label>';
+                    echo Html::radioList('attribute', null, $items, [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            return Html::tag('label',
+                                Html::radio($name, $checked, ['value' => $value]) .
+                                Html::tag('span', $label)
+                            );
+                        }
+                    ]);
+                    break;
+            }
+
+
         }
     }
 

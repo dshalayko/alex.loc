@@ -44,7 +44,8 @@
         "studio451/yii2-json-rpc-2.0-api": "^1.0",
         "mpdf/mpdf": "^8.1",
         "phpoffice/phpword": "^1.0",
-        "dompdf/dompdf": "^2.0"
+        "dompdf/dompdf": "^2.0",
+        "fancyapps/fancybox": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
@@ -61,7 +62,8 @@
             "enabled": false
         },
         "allow-plugins": {
-            "yiisoft/yii2-composer": true
+            "yiisoft/yii2-composer": true,
+            "robloach/component-installer": true
         }
     },
     "repositories": [

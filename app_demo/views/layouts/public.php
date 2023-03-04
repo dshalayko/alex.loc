@@ -84,7 +84,7 @@ NavBar::begin();
 $menuItems[] = ['label' => Yii::t('app', 'Главная'), 'url' => ['/']];
 $menuItems[] = ['label' => Yii::t('app', 'Контакты'), 'url' => ['/contact']];
 $menuItems[] = ['label' => Yii::t('app', 'Новости'), 'url' => ['/news']];
-$menuItems[] = ['label' => Yii::t('app', 'Услуги'), 'url' => ['/price']];
+$menuItems[] = ['label' => Yii::t('app', 'Услуги'), 'url' => ['page/uslugi']];
 $menuItems[] = ['label' => Yii::t('app', 'Реферальная программа'), 'url' => ['/referal']];
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
